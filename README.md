@@ -69,7 +69,7 @@ Key performance metrics such as **accuracy**, **loss**, and **confusion matrices
 
 ## 🔍 **Additional Details**
 
-- **🗂 Dataset Source:** [Kaggle - Lung Disease Dataset (4 types)](https://www.kaggle.com/)
+- **🗂 Dataset Source:** [Kaggle - Lung Disease Dataset (4 types)](https://www.kaggle.com/datasets/omkarmanohardalvi/lungs-disease-dataset-4-types)
 - **🌐 Real-World Applicability:** Early and accurate detection of lung diseases through AI-based solutions.
 - **💡 Challenges Overcome:**
   - Fine-tuning multiple **pre-trained models**.
