@@ -24,15 +24,29 @@ Key performance metrics such as **accuracy**, **loss**, and **confusion matrices
 > To accurately classify lung diseases using fine-tuned pre-trained models and interpret model decisions using visual explainability techniques like Grad-CAM.
 
 ---
-
-## 🛠 **Skills Required**
-
 ### **Technical Skills** 
+
+![Python](https://img.shields.io/badge/-Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/-TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
+![Keras](https://img.shields.io/badge/-Keras-D00000?style=for-the-badge&logo=keras&logoColor=white)
+![NumPy](https://img.shields.io/badge/-NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
+![Pandas](https://img.shields.io/badge/-Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+
 - **Python** (TensorFlow, Keras, NumPy, Pandas)
+
+![Deep Learning](https://img.shields.io/badge/-Deep%20Learning-FF6F00?style=for-the-badge&logo=deeplearning.ai&logoColor=white)
 - **Deep Learning** (CNN architectures, Transfer Learning)
+
+![Image Processing](https://img.shields.io/badge/-Image%20Processing-3498DB?style=for-the-badge&logo=opencv&logoColor=white)
 - **Image Processing** (Data Augmentation, Normalization)
+
+![Fine-Tuning](https://img.shields.io/badge/-Fine--Tuning-7D3C98?style=for-the-badge&logo=tensorflow&logoColor=white)
 - **Model Fine-Tuning** (Pre-trained Models, Training Techniques)
+
+![Grad-CAM](https://img.shields.io/badge/-Grad--CAM-FF4500?style=for-the-badge&logo=google&logoColor=white)
 - **Grad-CAM** (Model Interpretability)
+
+![Matplotlib](https://img.shields.io/badge/-Matplotlib-11557C?style=for-the-badge&logo=plotly&logoColor=white)
 - **Data Visualization** (matplotlib)
 
 ### **Soft Skills**
@@ -40,7 +54,6 @@ Key performance metrics such as **accuracy**, **loss**, and **confusion matrices
 - 🧠 **Problem-Solving**
 - 🎯 **Attention to Detail**
 - 📚 **Research & Adaptability**
-
 ---
 
 ## 📝 **Project Outputs**
