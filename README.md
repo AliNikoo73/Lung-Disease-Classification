@@ -1,77 +1,114 @@
-# 🩺 **Lung Disease Classification Using Fine-Tuned Pre-Trained Models on X-ray Images**
+# Lung Disease Classification
 
----
+[![CI](https://github.com/yourusername/lung-disease-classification/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/lung-disease-classification/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/yourusername/lung-disease-classification/branch/main/graph/badge.svg)](https://codecov.io/gh/yourusername/lung-disease-classification)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## 📜 **Summary**
+A deep learning project for classifying lung diseases from X-ray images using state-of-the-art convolutional neural networks.
 
-This project leverages the power of **deep learning** to classify **lung diseases** using X-ray images. The dataset consists of five classes:
+## Features
 
-- **Bacterial Pneumonia**
-- **Coronavirus Disease**
-- **Tuberculosis**
-- **Viral Pneumonia**
-- **Normal**
+- Multi-class classification of lung diseases:
+  - Bacterial Pneumonia
+  - COVID-19
+  - Tuberculosis
+  - Viral Pneumonia
+  - Normal
+- Support for multiple pre-trained architectures:
+  - DenseNet201
+  - ResNet152V2
+  - VGG16
+- Advanced data augmentation and preprocessing
+- Model interpretation using Grad-CAM
+- Comprehensive evaluation metrics and visualizations
 
-We use **pre-trained models** from the Keras library, such as **VGG16, ResNet152V2, and DenseNet201**, which are fine-tuned for optimal performance. The models undergo multiple trials, where **data augmentation** and preprocessing techniques are applied to improve generalization.
+## Installation
 
-Key performance metrics such as **accuracy**, **loss**, and **confusion matrices** are generated, along with **Grad-CAM** heatmaps to interpret and visualize the model’s decisions.
+1. Clone the repository:
 
-💡 **Significance:** Early and accurate detection of lung diseases can greatly improve patient outcomes, especially in **resource-limited** settings where such technology can augment healthcare delivery.
+```bash
+git clone https://github.com/yourusername/lung-disease-classification.git
+cd lung-disease-classification
+```
 
----
+2. Create and activate a virtual environment:
 
-## 🎯 **Objective**
-> To accurately classify lung diseases using fine-tuned pre-trained models and interpret model decisions using visual explainability techniques like Grad-CAM.
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
----
-### **Technical Skills** 
+3. Install dependencies:
 
-![Python](https://img.shields.io/badge/-Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![TensorFlow](https://img.shields.io/badge/-TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
-![Keras](https://img.shields.io/badge/-Keras-D00000?style=for-the-badge&logo=keras&logoColor=white)
-![NumPy](https://img.shields.io/badge/-NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
-![Pandas](https://img.shields.io/badge/-Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+```bash
+pip install -r requirements.txt
+```
 
-- **Python** (TensorFlow, Keras, NumPy, Pandas)
+## Dataset
 
-![Deep Learning](https://img.shields.io/badge/-Deep%20Learning-FF6F00?style=for-the-badge&logo=deeplearning.ai&logoColor=white)
-- **Deep Learning** (CNN architectures, Transfer Learning)
+Follow the instructions in [data/README.md](data/README.md) to download and set up the dataset.
 
-![Image Processing](https://img.shields.io/badge/-Image%20Processing-3498DB?style=for-the-badge&logo=opencv&logoColor=white)
-- **Image Processing** (Data Augmentation, Normalization)
+## Usage
 
-![Fine-Tuning](https://img.shields.io/badge/-Fine--Tuning-7D3C98?style=for-the-badge&logo=tensorflow&logoColor=white)
-- **Model Fine-Tuning** (Pre-trained Models, Training Techniques)
+### Training a Model
 
-![Grad-CAM](https://img.shields.io/badge/-Grad--CAM-FF4500?style=for-the-badge&logo=google&logoColor=white)
-- **Grad-CAM** (Model Interpretability)
+```python
+from src.data import DataLoader
+from src.model import LungDiseaseModel
+from src.evaluate import ModelEvaluator
 
-![Matplotlib](https://img.shields.io/badge/-Matplotlib-11557C?style=for-the-badge&logo=plotly&logoColor=white)
-- **Data Visualization** (matplotlib)
+# Load and preprocess data
+data_loader = DataLoader("data/")
+train_gen, val_gen = data_loader.load_and_preprocess()
 
-### **Soft Skills**
-- 🔍 **Analytical Thinking**
-- 🧠 **Problem-Solving**
-- 🎯 **Attention to Detail**
-- 📚 **Research & Adaptability**
----
+# Create and train model
+model = LungDiseaseModel(model_name='densenet')
+history = model.train(train_gen, val_gen, epochs=50)
 
-## 📝 **Project Outputs**
+# Evaluate model
+evaluator = ModelEvaluator(model.model, class_names=data_loader.classes)
+evaluator.plot_training_history(history)
+evaluator.compute_confusion_matrix(val_gen)
+print(evaluator.generate_classification_report(val_gen))
+```
 
-### **Deliverables**
-- 🏗 **Fine-Tuned Models** (e.g., VGG16, ResNet152V2, DenseNet201)
-- 🧮 **Confusion Matrices** & **ROC Curves**
-- 📊 **Model Performance Comparison**: Accuracy & Loss (Training, Validation, Testing)
-- 🔥 **Grad-CAM Heatmaps** for Explainability
-- 📈 **Bar Charts** Comparing Model Metrics
+### Generating Grad-CAM Visualizations
 
----
+```python
+evaluator.generate_gradcam("path/to/image.jpg")
+```
 
-## 🔍 **Additional Details**
+## Project Structure
 
-- **🗂 Dataset Source:** [Kaggle - Lung Disease Dataset (4 types)](https://www.kaggle.com/datasets/omkarmanohardalvi/lungs-disease-dataset-4-types)
-- **🌐 Real-World Applicability:** Early and accurate detection of lung diseases through AI-based solutions.
-- **💡 Challenges Overcome:**
-  - Fine-tuning multiple **pre-trained models**.
-  - Addressing **class imbalance** via **data augmentation** techniques.
-- **🌍 Impact:** This project offers a scalable and automated solution for healthcare providers, especially in **underserved** areas where radiologists are scarce.
+```
+lung-disease-classification/
+├── src/
+│   ├── data.py          # Data loading and preprocessing
+│   ├── model.py         # Model architecture and training
+│   └── evaluate.py      # Evaluation metrics and visualization
+├── tests/
+│   └── test_model.py    # Unit tests
+├── notebooks/
+│   └── example.ipynb    # Example usage notebook
+├── data/                # Dataset directory
+├── models/              # Saved model weights
+├── requirements.txt     # Project dependencies
+└── README.md           # Project documentation
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit changes: `git commit -am 'Add feature'`
+4. Push to the branch: `git push origin feature-name`
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Dataset source: [Kaggle](https://www.kaggle.com/datasets)
+- Pre-trained models: [Keras Applications](https://keras.io/api/applications/)
