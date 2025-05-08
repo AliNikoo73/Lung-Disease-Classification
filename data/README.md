@@ -1,35 +1,49 @@
-# Data Directory
+# Dataset Directory
 
-This directory should contain the lung disease X-ray image dataset. Due to size constraints, the actual dataset is not included in the repository.
+This directory contains the chest X-ray images dataset for lung disease classification.
 
-## Dataset Structure
-
-The dataset should be organized in the following structure:
+## Directory Structure
 
 ```
 data/
-├── train/
-│   ├── Bacterial_Pneumonia/
-│   ├── COVID-19/
-│   ├── Normal/
+├── train/          # Training images
+│   ├── Bacterial Pneumonia/
+│   ├── Corona Virus Disease/
+│   ├── NORMAL/
 │   ├── Tuberculosis/
-│   └── Viral_Pneumonia/
-└── test/
-    ├── Bacterial_Pneumonia/
-    ├── COVID-19/
-    ├── Normal/
+│   └── Viral Pneumonia/
+├── val/            # Validation images
+│   ├── Bacterial Pneumonia/
+│   ├── Corona Virus Disease/
+│   ├── NORMAL/
+│   ├── Tuberculosis/
+│   └── Viral Pneumonia/
+└── test/           # Test images
+    ├── Bacterial Pneumonia/
+    ├── Corona Virus Disease/
+    ├── NORMAL/
     ├── Tuberculosis/
-    └── Viral_Pneumonia/
+    └── Viral Pneumonia/
 ```
 
-## Getting the Dataset
+## Dataset Information
 
-1. Download the dataset from Kaggle: [Lung Disease Classification Dataset](https://www.kaggle.com/datasets)
-2. Extract the downloaded archive
-3. Place the images in their respective directories as shown in the structure above
+- Source: [Chest X-Ray Images (Pneumonia)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)
+- Classes: 5 classes of lung conditions
+- Image Format: JPEG/PNG
+- Image Size: Various (will be resized to 224x224 during training)
 
-## Data Format
+## Usage
 
-- Images should be in common formats (jpg, png)
-- Images will be automatically resized to 224x224 pixels during preprocessing
-- Each image should be properly labeled by placing it in the corresponding disease category folder
+1. Download the dataset from Kaggle
+2. Extract the contents to this directory
+3. The data will be automatically organized into train/val/test splits by the `download_dataset.py` script
+
+## Data Organization
+
+The dataset is organized into three splits:
+- Training set (70% of data)
+- Validation set (15% of data)
+- Test set (15% of data)
+
+Each split contains images from all five classes, maintaining the class distribution from the original dataset.

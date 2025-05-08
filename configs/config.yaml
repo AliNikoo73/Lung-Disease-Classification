@@ -1,0 +1,51 @@
+# Model Configuration
+model:
+  name: "EfficientNetV2B0"
+  img_size: 224
+  num_classes: 5
+  attention:
+    num_heads: 4
+    key_dim: 64
+  dense_layers:
+    neurons: 256
+    dropout: 0.5
+
+# Training Configuration
+training:
+  batch_size: 32
+  epochs: 50
+  learning_rate: 0.001
+  validation_split: 0.2
+  early_stopping:
+    patience: 10
+    min_delta: 0.001
+  reduce_lr:
+    factor: 0.2
+    patience: 5
+    min_lr: 1e-6
+
+# Data Configuration
+data:
+  train_dir: "data/train"
+  val_dir: "data/val"
+  test_dir: "data/test"
+  classes:
+    - "Bacterial Pneumonia"
+    - "Corona Virus Disease"
+    - "NORMAL"
+    - "Tuberculosis"
+    - "Viral Pneumonia"
+  augmentation:
+    rotation_range: 20
+    width_shift_range: 0.2
+    height_shift_range: 0.2
+    shear_range: 0.2
+    zoom_range: 0.2
+    horizontal_flip: true
+
+# Output Configuration
+output:
+  model_dir: "output/models"
+  results_dir: "output/results"
+  visualizations_dir: "output/visualizations"
+  tensorboard_dir: "output/tensorboard" 
