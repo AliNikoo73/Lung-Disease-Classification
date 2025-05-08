@@ -30,9 +30,31 @@ ENV/
 .vscode/
 *.swp
 *.swo
+.DS_Store
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*.ipynb
+
+# Project specific
+data/
+output/
+logs/
+*.h5
+*.ckpt
+*.pth
+*.pt
+*.pkl
+*.npy
+*.npz
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+coverage.xml
+*.cover
 
 # Data and models
 data/*
@@ -50,5 +72,4 @@ htmlcov/
 logs/
 
 # OS
-.DS_Store
 Thumbs.db 

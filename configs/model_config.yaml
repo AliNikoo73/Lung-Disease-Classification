@@ -1,0 +1,16 @@
+model:
+  name: "EfficientNetV2B0"
+  img_size: 224
+  num_classes: 5
+  attention:
+    num_heads: 4
+    key_dim: 64
+  dense_layers:
+    neurons: 256
+    dropout: 0.5
+  regularization:
+    l2_factor: 0.0001
+    dropout_rate: 0.3
+  batch_norm:
+    momentum: 0.99
+    epsilon: 0.001 

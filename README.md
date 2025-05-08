@@ -1,15 +1,76 @@
 # Lung Disease Classification
 
-A deep learning model for classifying lung diseases from chest X-ray images using transfer learning and attention mechanisms.
+A deep learning project for classifying lung diseases from chest X-ray images using transfer learning and attention mechanisms.
+
+## Project Structure
+
+```
+lung-disease-classification/
+├── configs/                     # Configuration files
+│   ├── model_config.yaml       # Model architecture configuration
+│   └── training_config.yaml    # Training hyperparameters
+├── data/                       # Dataset directory
+│   ├── raw/                   # Original dataset
+│   ├── processed/             # Preprocessed data
+│   └── README.md             # Dataset documentation
+├── notebooks/                  # Jupyter notebooks for analysis
+│   ├── exploratory_analysis.ipynb
+│   └── model_experiments.ipynb
+├── src/                       # Source code
+│   ├── data/                 # Data handling modules
+│   │   ├── __init__.py
+│   │   ├── dataset.py       # Dataset class
+│   │   └── preprocessing.py # Data preprocessing
+│   ├── models/              # Model architecture modules
+│   │   ├── __init__.py
+│   │   ├── base.py         # Base model class
+│   │   └── attention.py    # Attention mechanism
+│   ├── training/           # Training modules
+│   │   ├── __init__.py
+│   │   ├── trainer.py     # Training loop
+│   │   └── callbacks.py   # Custom callbacks
+│   ├── evaluation/        # Evaluation modules
+│   │   ├── __init__.py
+│   │   ├── metrics.py    # Custom metrics
+│   │   └── visualization.py # Plotting utilities
+│   └── utils/            # Utility functions
+│       ├── __init__.py
+│       └── helpers.py    # Helper functions
+├── tests/                # Unit tests
+│   ├── test_data.py
+│   ├── test_models.py
+│   └── test_training.py
+├── scripts/             # Command-line scripts
+│   ├── train.py        # Training script
+│   ├── predict.py      # Prediction script
+│   └── evaluate.py     # Evaluation script
+├── docs/               # Documentation
+│   ├── api/           # API documentation
+│   └── examples/      # Usage examples
+├── .github/           # GitHub configuration
+│   └── workflows/     # CI/CD workflows
+├── requirements/      # Project dependencies
+│   ├── base.txt      # Base requirements
+│   ├── dev.txt       # Development requirements
+│   └── test.txt      # Testing requirements
+├── setup.py          # Package setup
+├── pyproject.toml    # Project metadata
+├── .pre-commit-config.yaml  # Pre-commit hooks
+├── .gitignore
+├── LICENSE
+└── README.md
+```
 
 ## Features
 
 - Multi-class classification of lung diseases
-- Transfer learning with state-of-the-art models
-- Attention mechanism for improved feature extraction
-- Data augmentation for better generalization
-- Comprehensive evaluation metrics and visualizations
-- Grad-CAM visualization for model interpretability
+- Transfer learning with EfficientNetV2
+- Attention mechanism for better feature extraction
+- Data augmentation for improved generalization
+- Comprehensive evaluation metrics
+- Model interpretability with Grad-CAM
+- Experiment tracking and logging
+- Automated testing and CI/CD
 
 ## Installation
 
@@ -27,95 +88,55 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 3. Install the package:
 ```bash
-pip install -e .  # For development
+pip install -e ".[dev]"  # For development
 # or
-pip install -e ".[dev]"  # For development with testing tools
+pip install -e .  # For production
 ```
-
-## Dataset
-
-The project uses the Chest X-Ray Images (Pneumonia) dataset. You need to:
-1. Download the dataset from [Kaggle](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)
-2. Extract it to the `data` directory
-3. The data will be automatically organized into train/val/test splits
 
 ## Usage
 
 ### Training
 
-To train the model:
+```bash
+python scripts/train.py \
+    --config configs/training_config.yaml \
+    --data-dir data/processed \
+    --output-dir output
+```
+
+### Prediction
 
 ```bash
-python src/train_enhanced.py \
-    --data_dir data \
-    --model_name EfficientNetV2B0 \
-    --img_size 224 \
-    --batch_size 32 \
-    --epochs 50 \
-    --output_dir output
+python scripts/predict.py \
+    --model-path output/best_model.h5 \
+    --image-path path/to/image.jpg
 ```
 
-Arguments:
-- `--data_dir`: Path to dataset directory
-- `--model_name`: Base model architecture (default: EfficientNetV2B0)
-- `--img_size`: Image size (default: 224)
-- `--batch_size`: Batch size (default: 32)
-- `--epochs`: Number of epochs (default: 50)
-- `--output_dir`: Output directory for results (default: output)
-
-### Making Predictions
-
-To make predictions on new images:
+### Evaluation
 
 ```bash
-python src/predict.py \
-    --model_path output/EfficientNetV2B0_final.h5 \
-    --image_path path/to/image.jpg \
-    --class_names "NORMAL" "PNEUMONIA" \
-    --output_dir predictions
+python scripts/evaluate.py \
+    --model-path output/best_model.h5 \
+    --test-dir data/processed/test
 ```
 
-## Project Structure
+## Development
 
-```
-lung-disease-classification/
-├── data/               # Dataset directory
-├── src/               # Source code
-│   ├── __init__.py
-│   ├── data.py        # Data loading and preprocessing
-│   ├── model.py       # Base model implementation
-│   ├── enhanced_model.py  # Enhanced model with attention
-│   ├── train_enhanced.py  # Training script
-│   ├── predict.py     # Prediction script
-│   └── evaluate.py    # Evaluation utilities
-├── tests/             # Test files
-├── output/            # Training outputs
-├── requirements.txt   # Project dependencies
-├── setup.py          # Package configuration
-└── README.md         # Project documentation
+1. Install development dependencies:
+```bash
+pip install -e ".[dev]"
 ```
 
-## Model Architecture
+2. Run tests:
+```bash
+pytest tests/
+```
 
-The enhanced model includes:
-1. Pre-trained base model (e.g., EfficientNetV2)
-2. Attention mechanism using MultiHeadAttention
-3. Dense layers with batch normalization and dropout
-4. Softmax output layer
-
-## Training Process
-
-The training process consists of two phases:
-1. Initial training with frozen base model
-2. Fine-tuning with unfrozen base model
-
-## Evaluation
-
-The model evaluation includes:
-- Classification metrics (accuracy, precision, recall, F1-score)
-- ROC curves and AUC scores
-- Confusion matrix
-- Grad-CAM visualizations
+3. Run linting:
+```bash
+flake8 src tests
+black src tests
+```
 
 ## Contributing
 
@@ -131,6 +152,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-- Dataset provided by [Kaggle](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)
-- Model architectures from TensorFlow/Keras
-- Grad-CAM implementation from [Grad-CAM](https://github.com/jacobgil/pytorch-grad-cam)
+- Dataset: [Chest X-Ray Images (Pneumonia)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)
+- Model architecture: [EfficientNetV2](https://arxiv.org/abs/2104.00298)

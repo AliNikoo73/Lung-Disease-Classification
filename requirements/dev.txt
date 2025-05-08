@@ -1,0 +1,9 @@
+-r base.txt
+pytest>=7.0.0
+pytest-cov>=3.0.0
+black>=22.0.0
+flake8>=4.0.0
+mypy>=0.950
+pre-commit>=2.20.0
+jupyter>=1.0.0
+notebook>=6.4.0 

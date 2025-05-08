@@ -1,0 +1,30 @@
+training:
+  batch_size: 32
+  epochs: 50
+  learning_rate: 0.001
+  validation_split: 0.2
+  early_stopping:
+    patience: 10
+    min_delta: 0.001
+    restore_best_weights: true
+  reduce_lr:
+    factor: 0.2
+    patience: 5
+    min_lr: 1e-6
+  data_augmentation:
+    rotation_range: 20
+    width_shift_range: 0.2
+    height_shift_range: 0.2
+    shear_range: 0.2
+    zoom_range: 0.2
+    horizontal_flip: true
+    fill_mode: "nearest"
+  class_weights: true
+  mixup:
+    alpha: 0.2
+    enabled: true
+  callbacks:
+    tensorboard: true
+    model_checkpoint: true
+    early_stopping: true
+    reduce_lr: true 
